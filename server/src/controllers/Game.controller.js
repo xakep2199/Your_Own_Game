@@ -32,7 +32,7 @@ class GameController {
     try {
       const { questionId } = req.params;
       const { answer } = req.body;
-      const { user } = req;
+      const { user } = res.locals;
 
       if (!answer || typeof answer !== 'string') {
         return res.status(400).json(
@@ -62,7 +62,7 @@ class GameController {
 
   static async getGameStats(req, res) {
     try {
-      const { user } = req;
+      const { user } = res.locals;
 
       const userScores = await ScoreService.getUserScores(user.id);
       const totalScore = await ScoreService.getTotalUserScore(user.id);
