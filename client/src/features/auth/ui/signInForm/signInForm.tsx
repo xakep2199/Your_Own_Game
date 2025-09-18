@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { type SignInData, signInThunk, UserValidator } from "@/entities";
+import { type ISignInData, signInThunk, UserValidator } from "@/entities";
 import { CLIENT_ROUTES, useAppDispatch, useAppSelector } from "@/shared";
+import type { RootState } from "@/shared/lib/store";
 import styles from "./signInForm.module.css";
 
-const INITIAL_INPUTS_DATA: SignInData = {
+const INITIAL_INPUTS_DATA: ISignInData = {
   email: "",
   password: "",
 };
 
 export function SignInForm() {
-  const [inputs, setInputs] = useState<SignInData>(INITIAL_INPUTS_DATA);
+  const [inputs, setInputs] = useState<ISignInData>(INITIAL_INPUTS_DATA);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state: any) => state.auth);
+  const { loading, error } = useAppSelector((state: RootState) => state.user);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs((prev: SignInData) => ({
+    setInputs((prev: ISignInData) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
@@ -63,8 +64,8 @@ export function SignInForm() {
         required
       />
       {error && <div className={styles.error}>{error}</div>}
-      <button type="submit" className={styles.button} disabled={isLoading}>
-        {isLoading ? "Вход..." : "Войти"}
+      <button type="submit" className={styles.button} disabled={loading}>
+        {loading ? "Вход..." : "Войти"}
       </button>
     </form>
   );

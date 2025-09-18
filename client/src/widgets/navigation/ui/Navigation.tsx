@@ -1,5 +1,6 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector, CLIENT_ROUTES } from "@/shared";
+import type { RootState } from "@/shared/lib/store";
 import { signOutThunk } from "@/entities";
 import styles from "./Navigation.module.css";
 
@@ -7,7 +8,7 @@ export function Navigation(): React.JSX.Element {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store: any) => store.auth.user);
+  const user = useAppSelector((store: RootState) => store.user.user);
 
   const handleSignOut = async () => {
     dispatch(signOutThunk());
@@ -26,16 +27,13 @@ export function Navigation(): React.JSX.Element {
           Главная
         </NavLink>
         <NavLink
-          to={CLIENT_ROUTES.COUNTERS}
+          to={CLIENT_ROUTES.PROFILE}
           className={({ isActive }: { isActive: boolean }) =>
             `${styles.headerLink} ${isActive ? styles.headerLinkActive : ""}`
           }
         >
-          Счетчики
-        </NavLink>
-        <Link to={CLIENT_ROUTES.PROFILE} className={styles.headerLink}>
           Личный кабинет
-        </Link>
+        </NavLink>
       </div>
 
       {user ? (

@@ -1,0 +1,16 @@
+import { axiosInstance } from "@/shared/lib/axiosInstance";
+import { type StatisticsArrayType, STATISTICS_API_ROUTE } from "../model/statisticsModel";
+import { AxiosError } from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import type { ServerResponseType } from "../../../shared/types/server-response-type";
+
+
+export const getAllStatisticsByUserIdThunk = createAsyncThunk<StatisticsArrayType, number, { rejectValue: string }>("statistics/getAllStatisticsByUserId", async (userId, { rejectWithValue }) => {
+    try {
+        const { data } = await axiosInstance.get<ServerResponseType<StatisticsArrayType>>(`${STATISTICS_API_ROUTE}/user/${userId}`);
+        return data.data;
+    } catch (error) {
+        const err = error as AxiosError<ServerResponseType>;
+        return rejectWithValue(err.response!.data.error || "Ошибка при получении статистики");
+    }
+});

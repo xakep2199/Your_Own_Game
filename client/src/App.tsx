@@ -9,19 +9,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path={CLIENT_ROUTES.AUTH} element={<AuthPage />} />
-        <Route path={CLIENT_ROUTES.COUNTERS} element={<CountersPage />} />
         <Route path={CLIENT_ROUTES.PROFILE} element={<ProfilePage />} />
       </Route>
     </Routes>
-  );
-}
-
-function CountersPage() {
-  return (
-    <div>
-      <h1>Счетчики</h1>
-      <p>Здесь будут счетчики</p>
-    </div>
   );
 }
 

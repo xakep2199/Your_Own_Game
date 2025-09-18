@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUpThunk, UserValidator, type SignUpData } from "@/entities";
+import { signUpThunk, UserValidator, type ISignUpData } from "@/entities";
 import { CLIENT_ROUTES, useAppDispatch, useAppSelector } from "@/shared";
+import type { RootState } from "@/shared/lib/store";
 import styles from "./signUpForm.module.css";
 
-const INITIAL_INPUTS_DATA: SignUpData = {
+const INITIAL_INPUTS_DATA: ISignUpData = {
   username: "",
   email: "",
   password: "",
@@ -12,13 +13,13 @@ const INITIAL_INPUTS_DATA: SignUpData = {
 };
 
 export function SignUpForm() {
-  const [inputs, setInputs] = useState<SignUpData>(INITIAL_INPUTS_DATA);
+  const [inputs, setInputs] = useState<ISignUpData>(INITIAL_INPUTS_DATA);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state: any) => state.auth);
+  const { loading, error } = useAppSelector((state: RootState) => state.user);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs((prev: SignUpData) => ({
+    setInputs((prev: ISignUpData) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
@@ -83,8 +84,8 @@ export function SignUpForm() {
         required
       />
       {error && <div className={styles.error}>{error}</div>}
-      <button type="submit" className={styles.button} disabled={isLoading}>
-        {isLoading ? "Регистрация..." : "Зарегистрироваться"}
+      <button type="submit" className={styles.button} disabled={loading}>
+        {loading ? "Регистрация..." : "Зарегистрироваться"}
       </button>
     </form>
   );
