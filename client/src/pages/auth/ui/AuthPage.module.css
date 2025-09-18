@@ -1,0 +1,90 @@
+.authPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1d4ed8 100%);
+  padding: 2rem;
+  position: relative;
+}
+
+.authPage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 215, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 215, 0, 0.1) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.authContainer {
+  background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  border-radius: 20px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  z-index: 1;
+}
+
+.authTabs {
+  display: flex;
+  background: linear-gradient(90deg, #1e40af, #1d4ed8);
+  border-bottom: 2px solid #ffffff;
+}
+
+.authTab {
+  flex: 1;
+  padding: 1.2rem 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffd700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.authTab:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+}
+
+.authTab.active {
+  background: linear-gradient(145deg, #ffd700, #ffa500);
+  color: #1e3a8a;
+  text-shadow: none;
+  font-weight: 700;
+}
+
+.authTab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ffd700;
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.authContent {
+  padding: 2.5rem;
+  background: rgba(30, 58, 138, 0.8);
+}

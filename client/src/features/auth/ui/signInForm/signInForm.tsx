@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { type ISignInData, signInThunk, UserValidator } from "@/entities";
 import { CLIENT_ROUTES, useAppDispatch, useAppSelector } from "@/shared";
-import type { RootState } from "@/shared/lib/store";
+import type { RootState } from "../../../../app/store/store";
 import styles from "./signInForm.module.css";
 
 const INITIAL_INPUTS_DATA: ISignInData = {
