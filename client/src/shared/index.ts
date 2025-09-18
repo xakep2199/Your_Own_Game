@@ -1,4 +1,5 @@
-export { type ServerResponseType } from './types/server-response-type';
+export { store } from "./lib/store";
+export { useAppDispatch, useAppSelector } from "./lib/hooks";
+export { CLIENT_ROUTES } from "./enums/clientRoutes";
+export type { ServerResponseType } from "./types";
 export { axiosInstance, setAccessToken } from './lib/axiosInstance';
-export { useAppSelector } from './hooks/useAppSelector';
-export { useAppDispatch } from './hooks/useAppDispatch';
