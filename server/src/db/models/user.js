@@ -5,8 +5,11 @@ const bcrypt = require('bcrypt');
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate() {
-      // Ассоциации будут добавлены по мере необходимости
+static associate(models) {
+      User.hasMany(models.UserScore, {
+        foreignKey: 'userId',
+        as: 'userScores'
+      });
     }
 
     static validateEmail(email) {
