@@ -4,7 +4,7 @@ const formatResponse = require('../utils/formatResponse');
 class ScoreController {
   static async getUserScores(req, res) {
     try {
-      const { user } = req;
+      const { user } = res.locals;
       const scores = await ScoreService.getUserScores(user.id);
 
       return res.status(200).json(
@@ -19,7 +19,7 @@ class ScoreController {
   }
   static async updateScore(req, res) {
     try {
-      const { user } = req;
+      const { user } = res.locals;
       const { themeId } = req.params;
       const { points } = req.body;
 
@@ -43,7 +43,7 @@ class ScoreController {
 
   static async resetScore(req, res) {
     try {
-      const { user } = req;
+      const { user } = res.locals;
       const { themeId } = req.params;
       const userScore = await ScoreService.resetUserScore(user.id, themeId);
 
@@ -81,7 +81,7 @@ class ScoreController {
   }
   static async getTotalScore(req, res) {
     try {
-      const { user } = req;
+      const { user } = res.locals;
       const totalScore = await ScoreService.getTotalUserScore(user.id);
       return res.status(200).json(
         formatResponse(200, 'Общий счет пользователя получен', { totalScore })

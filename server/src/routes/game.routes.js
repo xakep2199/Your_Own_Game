@@ -5,22 +5,22 @@ const ScoreController = require('../controllers/Score.controller');
 const GameController = require('../controllers/Game.controller');
 const verifyAccessToken = require('../middleware/verifyAccessToken');
 
-quizRouter
+gameRouter
   .get('/themes', ThemeController.getAll)
   .get('/themes/:id', ThemeController.getById)
   .get('/themes/:id/questions', ThemeController.getQuestions);
 
-quizRouter
+gameRouter
   .get('/questions/theme/:themeId', QuestionController.getByTheme);
 
-quizRouter
+gameRouter
   .get('/scores', verifyAccessToken, ScoreController.getUserScores)
   .get('/scores/total', verifyAccessToken, ScoreController.getTotalScore)
   .put('/scores/theme/:themeId', verifyAccessToken, ScoreController.updateScore)
   .delete('/scores/theme/:themeId', verifyAccessToken, ScoreController.resetScore)
   .get('/leaderboard', ScoreController.getLeaderboard);
 
-quizRouter
+gameRouter
   .get('/game/question/:themeId/:points', verifyAccessToken, GameController.getQuestion)
   .post('/game/answer/:questionId', verifyAccessToken, GameController.answerQuestion)
   .get('/game/stats', verifyAccessToken, GameController.getGameStats);
