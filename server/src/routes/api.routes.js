@@ -2,6 +2,10 @@ const router = require('express').Router();
 const formatResponse = require('../utils/formatResponse');
 const authRoutes = require('./auth.routes');
 const gameRouter = require('./game.routes');
+const themeRouter = require('./theme.routes');
+const questionRouter = require('./question.routes');
+const scoreRouter = require('./score.routes');
+
 
 router.use('/auth', authRoutes);
 router.use('./game',gameRouter )
