@@ -4,7 +4,6 @@ import { axiosInstance, type ServerResponseType } from "@/shared";
 import {
   type IScore,
   type ITotalScore,
-  type IUpdateScoreRequest,
   type ScoreArrayType,
   type LeaderboardArrayType,
   SCORE_API_ROUTES,

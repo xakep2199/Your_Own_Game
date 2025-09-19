@@ -22,7 +22,7 @@ export function GameThemes({ selectedTheme, onThemeSelect }: GameThemesProps) {
   // const [themes, setThemes] = useState<ITheme[]>([]);
   // const [isLoading, setIsLoading] = useState(true);
 
-  const { themes, isLoading, error } = useAppSelector((state) => state.theme);
+  const { themes, isLoading} = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

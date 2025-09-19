@@ -3,7 +3,6 @@ import { AxiosError } from "axios";
 import { axiosInstance, type ServerResponseType } from "@/shared";
 import {
   type IGameQuestion,
-  type IAnswerRequest,
   type IAnswerResponse,
   type IGameStats,
   GAME_API_ROUTES,
