@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { themeReducer } from "@/entities";
-import { statisticsReducer } from "@/entities/statistics/slice/statisticsSlice";
+import { statisticsReducer } from "@/entities";
 import { userReducer } from "@/entities/user/slice/userSlice";
 
 export const store = configureStore({

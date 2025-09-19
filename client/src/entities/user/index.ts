@@ -3,6 +3,7 @@ export {
   type ISignInData,
   type ISignUpData,
   type UserResponseType,
+  USER_API_ROUTES
 } from "./model";
 export { UserValidator } from "./validation/UserValidator";
 export {
@@ -11,3 +12,4 @@ export {
   signUpThunk,
   refreshTokensThunk,
 } from "./api/userThunkApi";
+export {userReducer} from "./slice/userSlice"

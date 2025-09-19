@@ -5,6 +5,10 @@ const gameRouter = require('./game.routes');
 
 router.use('/auth', authRoutes);
 router.use('./game',gameRouter )
+router.use('./theme',themeRouter )
+router.use('./question',questionRouter )
+router.use('./score',scoreRouter )
+
 
 router.use((req, res) => {
   res

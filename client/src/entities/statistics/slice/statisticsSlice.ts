@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { type StatisticsArrayType } from "../model/statisticsModel";
-import { getAllStatisticsByUserIdThunk } from "../api/statisticsService";
+import { type StatisticsArrayType, getAllStatisticsByUserIdThunk } from "@/entities";
     
 type StatisticsState = {
     statistics: StatisticsArrayType;

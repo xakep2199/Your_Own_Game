@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpThunk, UserValidator, type ISignUpData } from "@/entities";
 import { CLIENT_ROUTES, useAppDispatch, useAppSelector } from "@/shared";
-import type { RootState } from "@/shared/lib/store";
 import styles from "./signUpForm.module.css";
 
 const INITIAL_INPUTS_DATA: ISignUpData = {
@@ -16,7 +15,7 @@ export function SignUpForm() {
   const [inputs, setInputs] = useState<ISignUpData>(INITIAL_INPUTS_DATA);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state: RootState) => state.user);
+  const { loading, error } = useAppSelector((state) => state.user);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev: ISignUpData) => ({

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { IUser } from "../model";
 import {
+  type IUser, 
   refreshTokensThunk,
   signUpThunk,
   signInThunk,
   signOutThunk,
-} from "../api/userThunkApi";
+} from "@/entities";
 
 // Тип состояния пользователя (тип всего слайса)
 type UserState = {

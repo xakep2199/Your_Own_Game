@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { axiosInstance, type ServerResponseType } from "@/shared";
-import type { ITheme, ThemeArrayType } from "../model";
+import type { ITheme, ThemeArrayType } from "@/entities";
 
 export const getAllThemesThunk = createAsyncThunk<
   ServerResponseType<ThemeArrayType>,

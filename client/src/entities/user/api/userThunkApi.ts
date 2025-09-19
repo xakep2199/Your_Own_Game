@@ -1,9 +1,7 @@
 import { AxiosError } from 'axios';
-import type { ServerResponseType } from '@/shared';
-import type { UserResponseType, ISignUpData, ISignInData } from '../model/';
-import { axiosInstance, setAccessToken } from '@/shared/';
+import { type ServerResponseType, axiosInstance, setAccessToken } from '@/shared';
+import { type  UserResponseType, type  ISignUpData, type  ISignInData, USER_API_ROUTES } from '@/entities';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { USER_API_ROUTES } from '../model';
 
 // Обновление токенов
 export const refreshTokensThunk = createAsyncThunk<ServerResponseType<UserResponseType>, void, { rejectValue: ServerResponseType }>('***user/refreshTokens***', async (_, { rejectWithValue }) => {

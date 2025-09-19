@@ -1,10 +1,9 @@
 import { useAppSelector } from "@/shared";
-import type { RootState } from "@/shared/lib/store";
 import styles from "./ProfilePage.module.css";
 
 export function ProfilePage() {
-  const user = useAppSelector((store: RootState) => store.user.user);
-  const userState = useAppSelector((store: RootState) => store.user);
+  const user = useAppSelector((store) => store.user.user);
+  const userState = useAppSelector((store) => store.user);
 
   return (
     <div className={styles.profilePage}>

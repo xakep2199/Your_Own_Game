@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector, CLIENT_ROUTES } from "@/shared";
-import type { RootState } from "@/shared/lib/store";
 import { signOutThunk } from "@/entities";
 import styles from "./Navigation.module.css";
 
@@ -8,7 +7,7 @@ export function Navigation(): React.JSX.Element {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store: RootState) => store.user.user);
+  const user = useAppSelector((store) => store.user.user);
 
   const handleSignOut = async () => {
     dispatch(signOutThunk());

@@ -1,4 +1,4 @@
-import type { ISignInData, ISignUpData } from "../model";
+import type { ISignInData, ISignUpData } from "@/entities";
 
 export class UserValidator {
   static validateEmail(email: string) {

@@ -1,8 +1,7 @@
-import { axiosInstance } from "@/shared/lib/axiosInstance";
-import { type StatisticsArrayType, STATISTICS_API_ROUTE } from "../model/statisticsModel";
+import { type StatisticsArrayType, STATISTICS_API_ROUTE } from "@/entities";
 import { AxiosError } from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { ServerResponseType } from "../../../shared/types/server-response-type";
+import { type ServerResponseType, axiosInstance } from "@/shared";
 
 
 export const getAllStatisticsByUserIdThunk = createAsyncThunk<StatisticsArrayType, number, { rejectValue: string }>("statistics/getAllStatisticsByUserId", async (userId, { rejectWithValue }) => {

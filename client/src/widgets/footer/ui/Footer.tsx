@@ -23,12 +23,6 @@ export function Footer(): React.JSX.Element {
             Главная
           </button>
           <button
-            onClick={() => navigate(CLIENT_ROUTES.COUNTERS)}
-            className={styles.footerLink}
-          >
-            Счетчики
-          </button>
-          <button
             onClick={() => navigate(CLIENT_ROUTES.PROFILE)}
             className={styles.footerLink}
           >

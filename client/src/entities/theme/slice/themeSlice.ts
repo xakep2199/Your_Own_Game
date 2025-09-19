@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllThemesThunk, getThemeByIdThunk } from "../api/ThemeThunkApi";
-import type { ITheme, ThemeArrayType } from "../model";
+import { getAllThemesThunk, getThemeByIdThunk, type ITheme, type ThemeArrayType } from "@/entities";
 
 type ThemeState = {
   themes: ThemeArrayType;
