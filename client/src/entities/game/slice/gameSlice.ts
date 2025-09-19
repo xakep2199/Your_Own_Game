@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IGameQuestion, IAnswerResponse, IGameStats } from "../model";
+import type { GameSession } from "@/app/middleware/gameSessionMiddleware";
 import {
   getQuestionThunk,
   answerQuestionThunk,
@@ -13,6 +14,7 @@ interface GameState {
   isLoading: boolean;
   error: string | null;
   answeredCards: string[];
+  gameSession: GameSession;
 }
 
 const initialState: GameState = {
@@ -22,6 +24,16 @@ const initialState: GameState = {
   isLoading: false,
   error: null,
   answeredCards: [],
+  gameSession: {
+    isActive: false,
+    currentThemeId: null,
+    currentThemeName: null,
+    sessionScore: 0,
+    answeredQuestions: 0,
+    totalQuestions: 4,
+    sessionId: "",
+    startTime: 0,
+  },
 };
 
 const gameSlice = createSlice({
@@ -42,6 +54,45 @@ const gameSlice = createSlice({
       state.lastAnswer = null;
       state.answeredCards = [];
       state.error = null;
+      state.gameSession = {
+        isActive: false,
+        currentThemeId: null,
+        currentThemeName: null,
+        sessionScore: 0,
+        answeredQuestions: 0,
+        totalQuestions: 4,
+        sessionId: "",
+        startTime: 0,
+      };
+    },
+    startGameSession: (
+      state,
+      action: PayloadAction<{ themeId: number; themeName: string }>
+    ) => {
+      state.gameSession = {
+        isActive: true,
+        currentThemeId: action.payload.themeId,
+        currentThemeName: action.payload.themeName,
+        sessionScore: 0,
+        answeredQuestions: 0,
+        totalQuestions: 4,
+        sessionId: `session_${Date.now()}_${Math.random()
+          .toString(36)
+          .substr(2, 9)}`,
+        startTime: Date.now(),
+      };
+    },
+    updateSessionScore: (state, action: PayloadAction<number>) => {
+      state.gameSession.sessionScore += action.payload;
+      state.gameSession.answeredQuestions += 1;
+    },
+    endGameSession: (state) => {
+      state.gameSession.isActive = false;
+      state.currentQuestion = null;
+      state.lastAnswer = null;
+    },
+    restoreSession: (state, action: PayloadAction<GameSession>) => {
+      state.gameSession = action.payload;
     },
     clearError: (state) => {
       state.error = null;
@@ -89,6 +140,14 @@ const gameSlice = createSlice({
   },
 });
 
-export const { clearCurrentQuestion, addAnsweredCard, resetGame, clearError } =
-  gameSlice.actions;
+export const {
+  clearCurrentQuestion,
+  addAnsweredCard,
+  resetGame,
+  clearError,
+  startGameSession,
+  updateSessionScore,
+  endGameSession,
+  restoreSession,
+} = gameSlice.actions;
 export const gameReducer = gameSlice.reducer;

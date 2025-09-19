@@ -116,6 +116,59 @@
   box-shadow: 0 2px 10px rgba(30, 64, 175, 0.3);
 }
 
+.gameSessionInfo {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #1e40af;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.2);
+}
+
+.gameSessionInfo h3 {
+  font-size: 1.5rem;
+  color: #1e40af;
+  margin: 0 0 1rem 0;
+  font-weight: bold;
+}
+
+.gameSessionInfo p {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(30, 64, 175, 0.05);
+  border-radius: 8px;
+}
+
+.endGameButton {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.endGameButton:hover {
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.endGameButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+}
+
 @keyframes glow {
   from {
     text-shadow: 3px 3px 0px #dc2626, 6px 6px 0px rgba(220, 38, 38, 0.3),

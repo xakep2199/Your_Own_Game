@@ -1,14 +1,46 @@
 import { useState, useEffect } from "react";
 import { GameThemes, GameField } from "@/widgets";
-import { type ITheme, resetGame } from "@/entities";
+import {
+  type ITheme,
+  resetGame,
+  startGameSession,
+  endGameSession,
+  restoreSession,
+} from "@/entities";
 import { useAppDispatch, useAppSelector, CLIENT_ROUTES } from "@/shared";
 import { NavLink } from "react-router-dom";
+import { restoreGameSession } from "@/app/middleware/gameSessionMiddleware";
 import styles from "./HomePage.module.css";
 
 export function HomePage() {
   const [selectedTheme, setSelectedTheme] = useState<ITheme | null>(null);
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
+  const { gameSession } = useAppSelector((state) => state.game);
+
+  // Восстановление игровой сессии при загрузке
+  useEffect(() => {
+    if (user) {
+      const savedSession = restoreGameSession();
+      if (savedSession && savedSession.isActive) {
+        // Восстанавливаем сессию с сохраненными данными
+        dispatch({
+          type: "game/startGameSession",
+          payload: {
+            themeId: savedSession.currentThemeId,
+            themeName: savedSession.currentThemeName,
+          },
+        });
+        // Восстанавливаем счет и прогресс
+        dispatch({
+          type: "game/updateSessionScore",
+          payload: 0,
+        });
+        // Устанавливаем сохраненные значения
+        dispatch(restoreSession(savedSession));
+      }
+    }
+  }, [user, dispatch]);
 
   // Сброс состояния игры при выходе пользователя
   useEffect(() => {
@@ -19,7 +51,20 @@ export function HomePage() {
   }, [user, dispatch]);
 
   const handleThemeSelect = (theme: ITheme) => {
-    setSelectedTheme(theme);
+    if (!gameSession.isActive) {
+      setSelectedTheme(theme);
+      dispatch(
+        startGameSession({
+          themeId: theme.id,
+          themeName: theme.name,
+        })
+      );
+    }
+  };
+
+  const handleEndGame = () => {
+    dispatch(endGameSession());
+    setSelectedTheme(null);
   };
 
   return (
@@ -43,14 +88,36 @@ export function HomePage() {
       ) : (
         <div className={styles.gameContainer}>
           <div className={styles.sidebar}>
-            <GameThemes
-              selectedTheme={selectedTheme}
-              onThemeSelect={handleThemeSelect}
-            />
+            {gameSession.isActive ? (
+              <div className={styles.gameSessionInfo}>
+                <h3>Игровая сессия</h3>
+                <p>Тема: {gameSession.currentThemeName}</p>
+                <p>Счет: {gameSession.sessionScore}</p>
+                <p>
+                  Вопросов отвечено: {gameSession.answeredQuestions}/
+                  {gameSession.totalQuestions}
+                </p>
+                <button
+                  onClick={handleEndGame}
+                  className={styles.endGameButton}
+                >
+                  Завершить игру
+                </button>
+              </div>
+            ) : (
+              <GameThemes
+                selectedTheme={selectedTheme}
+                onThemeSelect={handleThemeSelect}
+              />
+            )}
           </div>
 
           <div className={styles.gameField}>
-            <GameField selectedTheme={selectedTheme} />
+            <GameField
+              selectedTheme={selectedTheme}
+              gameSession={gameSession}
+              onGameComplete={handleEndGame}
+            />
           </div>
         </div>
       )}
