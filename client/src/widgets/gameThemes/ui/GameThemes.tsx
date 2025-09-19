@@ -1,8 +1,16 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/hooks";
-import { getAllThemesThunk, type ITheme } from "@/entities";
-import type { RootState } from "@/app/store/store";
+import { useState, useEffect } from "react";
+import { type ITheme } from "@/entities";
 import styles from "./GameThemes.module.css";
+
+// Моковые темы для демонстрации
+const MOCK_THEMES: ITheme[] = [
+  { id: 1, name: "История", createdAt: new Date(), updatedAt: new Date() },
+  { id: 2, name: "География", createdAt: new Date(), updatedAt: new Date() },
+  { id: 3, name: "Наука", createdAt: new Date(), updatedAt: new Date() },
+  { id: 4, name: "Литература", createdAt: new Date(), updatedAt: new Date() },
+  { id: 5, name: "Спорт", createdAt: new Date(), updatedAt: new Date() },
+  { id: 6, name: "Искусство", createdAt: new Date(), updatedAt: new Date() },
+];
 
 interface GameThemesProps {
   selectedTheme: ITheme | null;
@@ -10,27 +18,20 @@ interface GameThemesProps {
 }
 
 export function GameThemes({ selectedTheme, onThemeSelect }: GameThemesProps) {
-  const dispatch = useAppDispatch();
-  const { themes, isLoading, error } = useAppSelector(
-    (state: RootState) => state.theme
-  );
+  const [themes, setThemes] = useState<ITheme[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getAllThemesThunk());
-  }, [dispatch]);
+    setTimeout(() => {
+      setThemes(MOCK_THEMES);
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   if (isLoading) {
     return (
       <div className={styles.container}>
         <div className={styles.loading}>Загрузка тем...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.error}>Ошибка: {error}</div>
       </div>
     );
   }

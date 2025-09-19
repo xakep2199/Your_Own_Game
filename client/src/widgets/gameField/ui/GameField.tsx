@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { GameCard } from "./GameCard";
-import { type ITheme, QUESTION_POINTS } from "@/entities";
+import { type ITheme } from "@/entities";
 import styles from "./GameField.module.css";
+
+const QUESTION_POINTS = [200, 400, 600, 800] as const;
 
 interface GameFieldProps {
   selectedTheme: ITheme | null;
@@ -14,8 +16,8 @@ export function GameField({ selectedTheme }: GameFieldProps) {
   const handleAnswer = (points: number) => {
     if (selectedTheme) {
       const cardKey = `${selectedTheme.id}-${points}`;
-      setAnsweredCards(prev => new Set([...prev, cardKey]));
-      setTotalScore(prev => prev + points);
+      setAnsweredCards((prev) => new Set([...prev, cardKey]));
+      setTotalScore((prev) => prev + points);
     }
   };
 
@@ -42,7 +44,7 @@ export function GameField({ selectedTheme }: GameFieldProps) {
         <h2 className={styles.themeTitle}>{selectedTheme.name}</h2>
         <div className={styles.score}>Счет: {totalScore}</div>
       </div>
-      
+
       <div className={styles.gameGrid}>
         {QUESTION_POINTS.map((points) => (
           <GameCard

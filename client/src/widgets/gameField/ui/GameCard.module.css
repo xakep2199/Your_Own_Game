@@ -1,53 +1,55 @@
 .card {
   width: 100%;
   height: 100%;
-  background: linear-gradient(145deg, #3b82f6, #2563eb);
-  border: 3px solid #ffffff;
+  background: linear-gradient(145deg, #1e40af, #1e3a8a);
+  border: 3px solid #dc2626;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.3);
   position: relative;
   overflow: hidden;
 }
 
 .card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.3);
-  border-color: #ffd700;
+  box-shadow: 0 15px 40px rgba(30, 64, 175, 0.4), 0 0 20px rgba(220, 38, 38, 0.3);
+  border-color: #ef4444;
 }
 
 .card.answered {
-  background: linear-gradient(145deg, #10b981, #059669);
+  background: linear-gradient(145deg, #dc2626, #ef4444);
   cursor: default;
+  border-color: #1e40af;
 }
 
 .card.answered:hover {
   transform: none;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border-color: #ffffff;
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+  border-color: #1e40af;
 }
 
 .card.flipped {
-  background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
   cursor: default;
   padding: 1rem;
+  border-color: #1e40af;
 }
 
 .card.flipped:hover {
   transform: none;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border-color: #ffffff;
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.3);
+  border-color: #1e40af;
 }
 
 .points {
   font-size: 2.5rem;
   font-weight: 900;
   color: #ffffff;
-  text-shadow: 3px 3px 0px #000, 6px 6px 0px rgba(0, 0, 0, 0.3);
+  text-shadow: 3px 3px 0px #dc2626, 6px 6px 0px rgba(220, 38, 38, 0.3);
   letter-spacing: 2px;
 }
 
@@ -61,11 +63,11 @@
 
 .question {
   font-size: 1.2rem;
-  color: #ffd700;
+  color: #1e40af;
   text-align: center;
   line-height: 1.5;
   font-weight: 600;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(30, 64, 175, 0.3);
   flex: 1;
   display: flex;
   align-items: center;
@@ -81,37 +83,37 @@
 .input {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #ffffff;
+  border: 2px solid #1e40af;
   border-radius: 8px;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.9);
-  color: #1e3a8a;
+  color: #1e40af;
   font-weight: 600;
 }
 
 .input:focus {
   outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  border-color: #dc2626;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
 }
 
 .submitButton {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(145deg, #ffd700, #ffed4e);
-  border: 2px solid #ffffff;
+  background: linear-gradient(145deg, #dc2626, #ef4444);
+  border: 2px solid #1e40af;
   border-radius: 8px;
-  color: #1e3a8a;
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .submitButton:hover:not(:disabled) {
-  background: linear-gradient(145deg, #ffed4e, #ffd700);
+  background: linear-gradient(145deg, #ef4444, #dc2626);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
 }
 
 .submitButton:disabled {
@@ -133,31 +135,31 @@
 }
 
 .resultText.correct {
-  color: #10b981;
+  color: #dc2626;
 }
 
 .resultText.incorrect {
-  color: #ef4444;
+  color: #1e40af;
 }
 
 .correctAnswer {
   font-size: 1rem;
-  color: #ffd700;
+  color: #1e40af;
   font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(30, 64, 175, 0.3);
 }
 
 .pointsEarned {
   font-size: 1.2rem;
-  color: #ffd700;
+  color: #dc2626;
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(220, 38, 38, 0.3);
 }
 
 .closeButton {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(145deg, #ef4444, #dc2626);
-  border: 2px solid #ffffff;
+  background: linear-gradient(145deg, #1e40af, #1e3a8a);
+  border: 2px solid #dc2626;
   border-radius: 8px;
   color: #ffffff;
   font-size: 1rem;
@@ -168,7 +170,7 @@
 }
 
 .closeButton:hover {
-  background: linear-gradient(145deg, #dc2626, #b91c1c);
+  background: linear-gradient(145deg, #1e3a8a, #1e40af);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
 }
