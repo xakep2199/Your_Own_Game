@@ -4,7 +4,6 @@ import styles from "./AuthPage.module.css";
 
 export function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true);
-
   return (
     <div className={styles.authPage}>
       <div className={styles.authContainer}>

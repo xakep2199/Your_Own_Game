@@ -6,32 +6,32 @@ module.exports = {
       "Themes",
       [
         {
-          name: "Программирование и мемы",
+          name: "iPhone и смартфон-революция",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Dota 2",
+          name: "YouTube и видеоконтент",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Фильмы и сериалы",
+          name: "Социальные сети",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Аниме",
+          name: "Популярные цифровые платформы",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Игры",
+          name: "COVID-19 пандемия",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Интернет-культура",
+          name: "Криптовалюты и блокчейн",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
