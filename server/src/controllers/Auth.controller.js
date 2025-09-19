@@ -7,7 +7,7 @@ const generateJWTTokens = require('../utils/generateJWTTokens');
 const cookieConfig = require('../config/cookieConfig');
 
 class AuthController {
-  static async refreshTokens(req, res) {
+  static async refreshTokens(req, ) {
     try {
       const { refreshToken } = req.cookies;
 
@@ -19,7 +19,6 @@ class AuthController {
       const { accessToken, refreshToken: newRefreshToken } = generateJWTTokens({
         user,
       });
-
       return res
         .status(201)
         .cookie('refreshToken', newRefreshToken, cookieConfig)

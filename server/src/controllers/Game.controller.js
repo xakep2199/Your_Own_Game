@@ -59,7 +59,7 @@ class GameController {
       );
     }
   }
-
+  stat
   static async getGameStats(req, res) {
     try {
       const { user } = res.locals;
@@ -78,5 +78,4 @@ class GameController {
     }
   }
 }
-
 module.exports = GameController;
