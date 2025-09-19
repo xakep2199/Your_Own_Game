@@ -36,7 +36,12 @@ class QuestionService {
       ]
     });
   }
-
+  static async getQuestionsByTheme(themeId) {
+    return await Question.findAll({
+      where: { themeId },
+      order: [['points', 'ASC']]
+    });
+  }
 
   static async checkAnswer(questionId, userAnswer) {
     const question = await Question.findByPk(questionId);

@@ -2,10 +2,10 @@ const QuestionService = require('../services/Question.service');
 const formatResponse = require('../utils/formatResponse');
 
 class QuestionController {
-  static async getByTheme(req, res) {
+  static async getQuestionsByTheme(req, res) {
     try {
       const { themeId } = req.params;
-      const questions = await QuestionService.getByTheme(themeId);
+      const questions = await QuestionService.getQuestionsByTheme(themeId);
 
       return res.status(200).json(
         formatResponse(200, 'Вопросы темы успешно получены', questions)

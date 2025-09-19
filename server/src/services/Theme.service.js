@@ -26,13 +26,6 @@ class ThemeService {
     });
   }
 
-
-  static async getQuestionsByTheme(themeId) {
-    return await Question.findAll({
-      where: { themeId },
-      order: [['points', 'ASC']]
-    });
-  }
 }
 
 module.exports = ThemeService;
