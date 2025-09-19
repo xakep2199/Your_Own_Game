@@ -3,9 +3,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2rem;
-  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-  box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3), 0 0 20px rgba(220, 38, 38, 0.1);
-  border-bottom: 3px solid #dc2626;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3),
+    0 0 20px rgba(16, 185, 129, 0.1);
+  border-bottom: 3px solid #10b981;
   position: relative;
 }
 
@@ -18,12 +19,12 @@
   bottom: 0;
   background: radial-gradient(
       circle at 10% 20%,
-      rgba(220, 38, 38, 0.1) 0%,
+      rgba(16, 185, 129, 0.1) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 90% 80%,
-      rgba(30, 64, 175, 0.1) 0%,
+      rgba(139, 92, 246, 0.1) 0%,
       transparent 50%
     );
   pointer-events: none;
@@ -61,7 +62,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(220, 38, 38, 0.2),
+    rgba(16, 185, 129, 0.2),
     transparent
   );
   transition: left 0.5s ease;
@@ -73,15 +74,15 @@
 
 .headerLink:hover {
   color: #ffffff;
-  background: rgba(220, 38, 38, 0.2);
+  background: rgba(16, 185, 129, 0.2);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
 }
 
 .headerLinkActive {
   color: #ffffff;
-  background: linear-gradient(145deg, #dc2626, #ef4444);
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  background: linear-gradient(145deg, #10b981, #059669);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   font-weight: 700;
 }
 
@@ -106,7 +107,7 @@
 
 .signOutButton {
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(145deg, #dc2626, #b91c1c);
+  background: linear-gradient(145deg, #10b981, #059669);
   color: white;
   border: none;
   border-radius: 12px;
@@ -116,7 +117,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -142,9 +143,9 @@
 }
 
 .signOutButton:hover {
-  background: linear-gradient(145deg, #b91c1c, #991b1b);
+  background: linear-gradient(145deg, #059669, #047857);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 @media (max-width: 768px) {

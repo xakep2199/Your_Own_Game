@@ -6,10 +6,14 @@ import {
   startGameSession,
   endGameSession,
   restoreSession,
+  restoreAnsweredCards,
 } from "@/entities";
 import { useAppDispatch, useAppSelector, CLIENT_ROUTES } from "@/shared";
 import { NavLink } from "react-router-dom";
-import { restoreGameSession } from "@/app/middleware/gameSessionMiddleware";
+import {
+  restoreGameSession,
+  restoreAnsweredCards as restoreAnsweredCardsFromStorage,
+} from "@/app/middleware/gameSessionMiddleware";
 import styles from "./HomePage.module.css";
 
 export function HomePage() {
@@ -22,22 +26,22 @@ export function HomePage() {
   useEffect(() => {
     if (user) {
       const savedSession = restoreGameSession();
+      const savedAnsweredCards = restoreAnsweredCardsFromStorage();
+
       if (savedSession && savedSession.isActive) {
+        // Восстанавливаем answeredCards
+        dispatch(restoreAnsweredCards(savedAnsweredCards));
+
         // Восстанавливаем сессию с сохраненными данными
-        dispatch({
-          type: "game/startGameSession",
-          payload: {
-            themeId: savedSession.currentThemeId,
-            themeName: savedSession.currentThemeName,
-          },
-        });
-        // Восстанавливаем счет и прогресс
-        dispatch({
-          type: "game/updateSessionScore",
-          payload: 0,
-        });
-        // Устанавливаем сохраненные значения
         dispatch(restoreSession(savedSession));
+
+        // Восстанавливаем выбранную тему
+        if (savedSession.currentThemeId && savedSession.currentThemeName) {
+          setSelectedTheme({
+            id: savedSession.currentThemeId,
+            name: savedSession.currentThemeName,
+          });
+        }
       }
     }
   }, [user, dispatch]);
@@ -93,10 +97,6 @@ export function HomePage() {
                 <h3>Игровая сессия</h3>
                 <p>Тема: {gameSession.currentThemeName}</p>
                 <p>Счет: {gameSession.sessionScore}</p>
-                <p>
-                  Вопросов отвечено: {gameSession.answeredQuestions}/
-                  {gameSession.totalQuestions}
-                </p>
                 <button
                   onClick={handleEndGame}
                   className={styles.endGameButton}
@@ -116,7 +116,6 @@ export function HomePage() {
             <GameField
               selectedTheme={selectedTheme}
               gameSession={gameSession}
-              onGameComplete={handleEndGame}
             />
           </div>
         </div>

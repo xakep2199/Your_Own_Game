@@ -90,9 +90,13 @@ const gameSlice = createSlice({
       state.gameSession.isActive = false;
       state.currentQuestion = null;
       state.lastAnswer = null;
+      state.answeredCards = [];
     },
     restoreSession: (state, action: PayloadAction<GameSession>) => {
       state.gameSession = action.payload;
+    },
+    restoreAnsweredCards: (state, action: PayloadAction<string[]>) => {
+      state.answeredCards = action.payload;
     },
     clearError: (state) => {
       state.error = null;
@@ -149,5 +153,6 @@ export const {
   updateSessionScore,
   endGameSession,
   restoreSession,
+  restoreAnsweredCards,
 } = gameSlice.actions;
 export const gameReducer = gameSlice.reducer;
