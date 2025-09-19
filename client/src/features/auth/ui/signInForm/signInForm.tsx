@@ -13,7 +13,7 @@ export function SignInForm() {
   const [inputs, setInputs] = useState<ISignInData>(INITIAL_INPUTS_DATA);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.user);
+  const { loading} = useAppSelector((state) => state.user);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev: ISignInData) => ({

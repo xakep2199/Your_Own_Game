@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {
-  IScore,
-  ITotalScore,
-  ILeaderboardEntry,
+
   ScoreArrayType,
   LeaderboardArrayType,
 } from "../model";

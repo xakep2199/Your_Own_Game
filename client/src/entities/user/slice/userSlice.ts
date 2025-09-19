@@ -10,7 +10,7 @@ import {
 // Тип состояния пользователя (тип всего слайса)
 type UserState = {
   user: IUser | null;
-  error: string | null;
+  error?: string | null;
   loading?: boolean;
   isInitialized?: boolean;
 };
