@@ -19,3 +19,9 @@ export {
   getAllStatisticsByUserIdThunk,
   statisticsReducer,
 } from "./statistics";
+export {
+  type IQuestion,
+  type QuestionArrayType,
+  getQuestionsByThemeIdThunk,
+  questionsReducer,
+} from "./questions";

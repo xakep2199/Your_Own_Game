@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { themeReducer } from "@/entities";
-import { statisticsReducer } from "@/entities";
-import { userReducer } from "@/entities/user/slice/userSlice";
+import { questionsReducer, themeReducer, statisticsReducer, userReducer } from "@/entities";
+
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
         theme: themeReducer,
         statistics: statisticsReducer,
+        questions: questionsReducer,
     },
 });
 
