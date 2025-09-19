@@ -27,13 +27,7 @@ export {
 } from "./statistics";
 export {
   type IQuestion,
-  type IGameAnswer,
   type QuestionArrayType,
-  type QuestionPointsType,
-  QUESTION_POINTS,
-  questionReducer,
-  clearCurrentQuestion,
-  clearGameAnswer,
-  getQuestionByThemeAndPointsThunk,
-  answerQuestionThunk,
-} from "./question";
+  getQuestionsByThemeIdThunk,
+  questionsReducer,
+} from "./questions";
