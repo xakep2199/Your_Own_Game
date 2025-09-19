@@ -6,27 +6,32 @@ module.exports = {
       "Themes",
       [
         {
-          name: "История России",
+          name: "Программирование и мемы",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "География",
+          name: "Dota 2",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Литература",
+          name: "Фильмы и сериалы",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Наука и технологии",
+          name: "Аниме",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Спорт",
+          name: "Игры",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Интернет-культура",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
