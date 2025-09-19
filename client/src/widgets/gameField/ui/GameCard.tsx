@@ -15,7 +15,7 @@ interface GameCardProps {
   theme: ITheme;
   isAnswered: boolean;
   isActive: boolean;
-  onAnswer: () => void;
+  onAnswer: (points: number) => void;
   onCardOpen: (points: number) => void;
   onCardClose: () => void;
 }
@@ -88,7 +88,7 @@ export function GameCard({
       setShowAnswer(true);
 
       // Вызываем onAnswer для обновления счета
-      onAnswer();
+      onAnswer(result.data.points);
 
       if (result.data.correct) {
         const cardKey = `${theme.id}-${points}`;

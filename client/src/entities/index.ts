@@ -47,6 +47,10 @@ export {
   addAnsweredCard,
   resetGame,
   clearError as clearGameError,
+  startGameSession,
+  updateSessionScore,
+  endGameSession,
+  restoreSession,
 } from "./game";
 export {
   type IScore,

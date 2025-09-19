@@ -7,8 +7,9 @@ import {
   gameReducer,
   scoreReducer,
 } from "@/entities";
+import { gameSessionMiddleware } from "../middleware/gameSessionMiddleware";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     user: userReducer,
     theme: themeReducer,
@@ -17,7 +18,10 @@ export const store = configureStore({
     game: gameReducer,
     score: scoreReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(gameSessionMiddleware),
 });
 
+export { store };
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

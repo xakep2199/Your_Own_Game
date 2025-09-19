@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import { GameCard } from "./GameCard";
-import { type ITheme, getTotalScoreThunk, resetGame } from "@/entities";
+import { type ITheme, resetGame, updateSessionScore } from "@/entities";
 import { useAppDispatch, useAppSelector } from "@/shared";
+import type { GameSession } from "@/app/middleware/gameSessionMiddleware";
 import styles from "./GameField.module.css";
 
 const QUESTION_POINTS = [200, 400, 600, 800] as const;
 
 interface GameFieldProps {
   selectedTheme: ITheme | null;
+  gameSession: GameSession;
+  onGameComplete: () => void;
 }
 
-export function GameField({ selectedTheme }: GameFieldProps) {
+export function GameField({
+  selectedTheme,
+  gameSession,
+  onGameComplete,
+}: GameFieldProps) {
   const dispatch = useAppDispatch();
   const { answeredCards } = useAppSelector((state) => state.game);
-  const { totalScore } = useAppSelector((state) => state.score);
   const [activeCard, setActiveCard] = useState<number | null>(null);
-
-  useEffect(() => {
-    dispatch(getTotalScoreThunk());
-  }, [dispatch]);
 
   // Сброс состояния игры при смене темы
   useEffect(() => {
@@ -28,9 +30,17 @@ export function GameField({ selectedTheme }: GameFieldProps) {
     }
   }, [selectedTheme, dispatch]);
 
-  const handleAnswer = () => {
-    // Обновляем счет при любом ответе (правильном или неправильном)
-    dispatch(getTotalScoreThunk());
+  const handleAnswer = (points: number) => {
+    // Обновляем счет сессии
+    dispatch(updateSessionScore(points));
+
+    // Проверяем, завершена ли игра
+    if (gameSession.answeredQuestions + 1 >= gameSession.totalQuestions) {
+      // Игра завершена, показываем результат
+      setTimeout(() => {
+        onGameComplete();
+      }, 2000); // Даем время на показ результата
+    }
   };
 
   const handleCardOpen = (points: number) => {
@@ -62,7 +72,15 @@ export function GameField({ selectedTheme }: GameFieldProps) {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.themeTitle}>{selectedTheme.name}</h2>
-        <div className={styles.score}>Счет: {totalScore}</div>
+        <div className={styles.scoreInfo}>
+          <div className={styles.score}>
+            Счет сессии: {gameSession.sessionScore}
+          </div>
+          <div className={styles.progress}>
+            Вопросов: {gameSession.answeredQuestions}/
+            {gameSession.totalQuestions}
+          </div>
+        </div>
       </div>
 
       <div className={styles.gameGrid}>
