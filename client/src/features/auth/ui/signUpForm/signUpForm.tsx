@@ -82,7 +82,7 @@ export function SignUpForm() {
         className={styles.input}
         required
       />
-      {error && <div className={styles.error}>{error}</div>}
+      {/* {error && <div className={styles.error}>{error}</div>} */}
       <button type="submit" className={styles.button} disabled={loading}>
         {loading ? "Регистрация..." : "Зарегистрироваться"}
       </button>

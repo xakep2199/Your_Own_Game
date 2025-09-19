@@ -25,14 +25,16 @@ export function Navigation(): React.JSX.Element {
         >
           Главная
         </NavLink>
-        <NavLink
-          to={CLIENT_ROUTES.PROFILE}
-          className={({ isActive }: { isActive: boolean }) =>
-            `${styles.headerLink} ${isActive ? styles.headerLinkActive : ""}`
-          }
-        >
-          Личный кабинет
-        </NavLink>
+        {user && (
+          <NavLink
+            to={CLIENT_ROUTES.PROFILE}
+            className={({ isActive }: { isActive: boolean }) =>
+              `${styles.headerLink} ${isActive ? styles.headerLinkActive : ""}`
+            }
+          >
+            Личный кабинет
+          </NavLink>
+        )}
       </div>
 
       {user ? (

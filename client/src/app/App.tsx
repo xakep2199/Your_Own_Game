@@ -1,8 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "@/app/layout/Layout";
 import { AuthPage, HomePage, ProfilePage } from "@/pages";
-import { CLIENT_ROUTES } from "@/shared";
+import { CLIENT_ROUTES, useAppDispatch } from "@/shared";
+import { useEffect } from "react";
+import { refreshTokensThunk } from "@/entities";
 function App() {
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(refreshTokensThunk());
+  }, []);
+  
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
