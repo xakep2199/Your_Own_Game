@@ -4,6 +4,8 @@ import {
   themeReducer,
   statisticsReducer,
   userReducer,
+  gameReducer,
+  scoreReducer,
 } from "@/entities";
 
 export const store = configureStore({
@@ -12,6 +14,8 @@ export const store = configureStore({
     theme: themeReducer,
     statistics: statisticsReducer,
     questions: questionsReducer,
+    game: gameReducer,
+    score: scoreReducer,
   },
 });
 

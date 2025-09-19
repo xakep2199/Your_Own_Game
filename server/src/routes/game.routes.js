@@ -4,8 +4,8 @@ const verifyAccessToken = require('../middleware/verifyAccessToken');
 
 
 gameRouter
-  .get('/game/question/:themeId/:points', verifyAccessToken, GameController.getQuestion)
-  .post('/game/answer/:questionId', verifyAccessToken, GameController.answerQuestion)
-  .get('/game/stats', verifyAccessToken, GameController.getGameStats);
+  .get('/question/:themeId/:points', verifyAccessToken, GameController.getQuestion)
+  .post('/answer/:questionId', verifyAccessToken, GameController.answerQuestion)
+  .get('/stats', verifyAccessToken, GameController.getGameStats);
 
 module.exports = gameRouter;

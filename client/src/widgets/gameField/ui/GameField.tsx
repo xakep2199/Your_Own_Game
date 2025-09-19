@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { GameCard } from "./GameCard";
-import { type ITheme } from "@/entities";
+import { type ITheme, getTotalScoreThunk } from "@/entities";
+import { useAppDispatch, useAppSelector } from "@/shared";
 import styles from "./GameField.module.css";
 
 const QUESTION_POINTS = [200, 400, 600, 800] as const;
@@ -10,21 +11,24 @@ interface GameFieldProps {
 }
 
 export function GameField({ selectedTheme }: GameFieldProps) {
-  const [answeredCards, setAnsweredCards] = useState<Set<string>>(new Set());
-  const [totalScore, setTotalScore] = useState(0);
+  const dispatch = useAppDispatch();
+  const { answeredCards } = useAppSelector((state) => state.game);
+  const { totalScore } = useAppSelector((state) => state.score);
+
+  useEffect(() => {
+    dispatch(getTotalScoreThunk());
+  }, [dispatch]);
 
   const handleAnswer = (points: number) => {
-    if (selectedTheme) {
-      const cardKey = `${selectedTheme.id}-${points}`;
-      setAnsweredCards((prev) => new Set([...prev, cardKey]));
-      setTotalScore((prev) => prev + points);
+    if (points > 0) {
+      dispatch(getTotalScoreThunk());
     }
   };
 
   const isCardAnswered = (points: number) => {
     if (!selectedTheme) return false;
     const cardKey = `${selectedTheme.id}-${points}`;
-    return answeredCards.has(cardKey);
+    return answeredCards.includes(cardKey);
   };
 
   if (!selectedTheme) {
