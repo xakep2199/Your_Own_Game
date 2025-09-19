@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GameCard } from "./GameCard";
-import { type ITheme, getTotalScoreThunk } from "@/entities";
+import { type ITheme, getTotalScoreThunk, resetGame } from "@/entities";
 import { useAppDispatch, useAppSelector } from "@/shared";
 import styles from "./GameField.module.css";
 
@@ -14,15 +14,31 @@ export function GameField({ selectedTheme }: GameFieldProps) {
   const dispatch = useAppDispatch();
   const { answeredCards } = useAppSelector((state) => state.game);
   const { totalScore } = useAppSelector((state) => state.score);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   useEffect(() => {
     dispatch(getTotalScoreThunk());
   }, [dispatch]);
 
-  const handleAnswer = (points: number) => {
-    if (points > 0) {
-      dispatch(getTotalScoreThunk());
+  // Сброс состояния игры при смене темы
+  useEffect(() => {
+    if (selectedTheme) {
+      dispatch(resetGame());
+      setActiveCard(null);
     }
+  }, [selectedTheme, dispatch]);
+
+  const handleAnswer = () => {
+    // Обновляем счет при любом ответе (правильном или неправильном)
+    dispatch(getTotalScoreThunk());
+  };
+
+  const handleCardOpen = (points: number) => {
+    setActiveCard(points);
+  };
+
+  const handleCardClose = () => {
+    setActiveCard(null);
   };
 
   const isCardAnswered = (points: number) => {
@@ -56,7 +72,10 @@ export function GameField({ selectedTheme }: GameFieldProps) {
             points={points}
             theme={selectedTheme}
             isAnswered={isCardAnswered(points)}
+            isActive={activeCard === points}
             onAnswer={handleAnswer}
+            onCardOpen={handleCardOpen}
+            onCardClose={handleCardClose}
           />
         ))}
       </div>

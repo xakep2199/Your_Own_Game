@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   type ITheme,
   getQuestionThunk,
   answerQuestionThunk,
   addAnsweredCard,
-  clearCurrentQuestion,
 } from "@/entities";
 import { useAppDispatch, useAppSelector } from "@/shared";
 import styles from "./GameCard.module.css";
@@ -15,30 +14,60 @@ interface GameCardProps {
   points: QuestionPointsType;
   theme: ITheme;
   isAnswered: boolean;
-  onAnswer: (points: number) => void;
+  isActive: boolean;
+  onAnswer: () => void;
+  onCardOpen: (points: number) => void;
+  onCardClose: () => void;
 }
 
 export function GameCard({
   points,
   theme,
   isAnswered,
+  isActive,
   onAnswer,
+  onCardOpen,
+  onCardClose,
 }: GameCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState<any>(null);
+  const [lastAnswer, setLastAnswer] = useState<any>(null);
 
   const dispatch = useAppDispatch();
-  const { currentQuestion, lastAnswer, isLoading } = useAppSelector(
-    (state) => state.game
-  );
+  const { isLoading } = useAppSelector((state) => state.game);
+
+  // Сброс состояния карточки при смене темы
+  useEffect(() => {
+    setIsFlipped(false);
+    setUserAnswer("");
+    setShowAnswer(false);
+    setCurrentQuestion(null);
+    setLastAnswer(null);
+  }, [theme.id]);
+
+  // Закрытие карточки, если она не активна
+  useEffect(() => {
+    if (!isActive && isFlipped) {
+      setIsFlipped(false);
+      setUserAnswer("");
+      setShowAnswer(false);
+      setCurrentQuestion(null);
+      setLastAnswer(null);
+    }
+  }, [isActive, isFlipped]);
 
   const handleCardClick = async () => {
     if (isAnswered || isFlipped) return;
 
     try {
-      await dispatch(getQuestionThunk({ themeId: theme.id, points })).unwrap();
+      const result = await dispatch(
+        getQuestionThunk({ themeId: theme.id, points })
+      ).unwrap();
+      setCurrentQuestion(result.data);
       setIsFlipped(true);
+      onCardOpen(points);
     } catch (error) {
       console.error("Ошибка при получении вопроса:", error);
     }
@@ -48,21 +77,22 @@ export function GameCard({
     if (!currentQuestion || !userAnswer.trim()) return;
 
     try {
-      await dispatch(
+      const result = await dispatch(
         answerQuestionThunk({
           questionId: currentQuestion.id,
           answer: userAnswer.trim(),
         })
       ).unwrap();
 
-      if (lastAnswer) {
-        setShowAnswer(true);
-        onAnswer(lastAnswer.points);
+      setLastAnswer(result.data);
+      setShowAnswer(true);
 
-        if (lastAnswer.correct) {
-          const cardKey = `${theme.id}-${points}`;
-          dispatch(addAnsweredCard(cardKey));
-        }
+      // Вызываем onAnswer для обновления счета
+      onAnswer();
+
+      if (result.data.correct) {
+        const cardKey = `${theme.id}-${points}`;
+        dispatch(addAnsweredCard(cardKey));
       }
     } catch (error) {
       console.error("Ошибка при отправке ответа:", error);
@@ -73,7 +103,9 @@ export function GameCard({
     setIsFlipped(false);
     setUserAnswer("");
     setShowAnswer(false);
-    dispatch(clearCurrentQuestion());
+    setCurrentQuestion(null);
+    setLastAnswer(null);
+    onCardClose();
   };
 
   if (isAnswered) {

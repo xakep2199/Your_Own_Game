@@ -90,6 +90,9 @@ const userSlice = createSlice({
       // Успешный выход
       .addCase(signOutThunk.fulfilled, (state) => {
         state.user = null;
+        state.loading = false;
+        state.isInitialized = true;
+        state.error = null;
       })
       // Ошибка при выходе
       .addCase(signOutThunk.rejected, (state, action) => {

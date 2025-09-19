@@ -11,7 +11,7 @@ router.use('/auth', authRoutes);
 router.use('/game',gameRouter )
 router.use('/themes',themeRouter )
 router.use('/questions',questionRouter )
-router.use('/score',scoreRouter )
+router.use('/scores',scoreRouter )
 
 
 router.use((req, res) => {
