@@ -8,10 +8,10 @@ const scoreRouter = require('./score.routes');
 
 
 router.use('/auth', authRoutes);
-router.use('./game',gameRouter )
-router.use('./theme',themeRouter )
-router.use('./question',questionRouter )
-router.use('./score',scoreRouter )
+router.use('/game',gameRouter )
+router.use('/themes',themeRouter )
+router.use('/questions',questionRouter )
+router.use('/score',scoreRouter )
 
 
 router.use((req, res) => {

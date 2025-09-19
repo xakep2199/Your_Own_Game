@@ -4,9 +4,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type ServerResponseType, axiosInstance } from "@/shared";
 
 
-export const getAllStatisticsByUserIdThunk = createAsyncThunk<StatisticsArrayType, number, { rejectValue: string }>("statistics/getAllStatisticsByUserId", async (userId, { rejectWithValue }) => {
+export const getAllStatisticsByUserIdThunk = createAsyncThunk<StatisticsArrayType, void, { rejectValue: string }>("statistics/getAllStatisticsByUserId", async (_, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.get<ServerResponseType<StatisticsArrayType>>(`${STATISTICS_API_ROUTE}/user/${userId}`);
+        const { data } = await axiosInstance.get<ServerResponseType<StatisticsArrayType>>(`${STATISTICS_API_ROUTE}`);
         return data.data;
     } catch (error) {
         const err = error as AxiosError<ServerResponseType>;
