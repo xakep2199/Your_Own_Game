@@ -1,6 +1,7 @@
 import type { Middleware } from "@reduxjs/toolkit";
 
 const GAME_SESSION_KEY = "gameSession";
+const ANSWERED_CARDS_KEY = "answeredCards";
 
 // Тип для игровой сессии
 export interface GameSession {
@@ -17,6 +18,7 @@ export interface GameSession {
 // Тип для состояния игры
 interface GameState {
   gameSession: GameSession;
+  answeredCards: string[];
 }
 
 // Тип для корневого состояния
@@ -38,11 +40,14 @@ export const gameSessionMiddleware: Middleware<object, RootState> =
     ) {
       const state = store.getState();
       const gameSession = state.game.gameSession;
+      const answeredCards = state.game.answeredCards;
 
       if (gameSession.isActive) {
         localStorage.setItem(GAME_SESSION_KEY, JSON.stringify(gameSession));
+        localStorage.setItem(ANSWERED_CARDS_KEY, JSON.stringify(answeredCards));
       } else {
         localStorage.removeItem(GAME_SESSION_KEY);
+        localStorage.removeItem(ANSWERED_CARDS_KEY);
       }
     }
 
@@ -81,4 +86,24 @@ export const restoreGameSession = (): GameSession | null => {
     localStorage.removeItem(GAME_SESSION_KEY);
   }
   return null;
+};
+
+export const restoreAnsweredCards = (): string[] => {
+  try {
+    const savedCards = localStorage.getItem(ANSWERED_CARDS_KEY);
+    if (savedCards) {
+      const parsedCards = JSON.parse(savedCards);
+      if (Array.isArray(parsedCards)) {
+        return parsedCards;
+      } else {
+        console.warn("Неверная структура сохраненных карточек");
+        localStorage.removeItem(ANSWERED_CARDS_KEY);
+        return [];
+      }
+    }
+  } catch (error) {
+    console.error("Ошибка при восстановлении карточек:", error);
+    localStorage.removeItem(ANSWERED_CARDS_KEY);
+  }
+  return [];
 };

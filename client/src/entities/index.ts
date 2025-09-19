@@ -51,6 +51,7 @@ export {
   updateSessionScore,
   endGameSession,
   restoreSession,
+  restoreAnsweredCards,
 } from "./game";
 export {
   type IScore,

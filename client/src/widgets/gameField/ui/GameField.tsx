@@ -10,37 +10,23 @@ const QUESTION_POINTS = [200, 400, 600, 800] as const;
 interface GameFieldProps {
   selectedTheme: ITheme | null;
   gameSession: GameSession;
-  onGameComplete: () => void;
 }
 
-export function GameField({
-  selectedTheme,
-  gameSession,
-  onGameComplete,
-}: GameFieldProps) {
+export function GameField({ selectedTheme, gameSession }: GameFieldProps) {
   const dispatch = useAppDispatch();
   const { answeredCards } = useAppSelector((state) => state.game);
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  // Сброс состояния игры при смене темы
   useEffect(() => {
-    if (selectedTheme) {
+    if (selectedTheme && !gameSession.isActive) {
       dispatch(resetGame());
       setActiveCard(null);
     }
-  }, [selectedTheme, dispatch]);
+  }, [selectedTheme, gameSession.isActive, dispatch]);
 
   const handleAnswer = (points: number) => {
     // Обновляем счет сессии
     dispatch(updateSessionScore(points));
-
-    // Проверяем, завершена ли игра
-    if (gameSession.answeredQuestions + 1 >= gameSession.totalQuestions) {
-      // Игра завершена, показываем результат
-      setTimeout(() => {
-        onGameComplete();
-      }, 2000); // Даем время на показ результата
-    }
   };
 
   const handleCardOpen = (points: number) => {
@@ -75,10 +61,6 @@ export function GameField({
         <div className={styles.scoreInfo}>
           <div className={styles.score}>
             Счет сессии: {gameSession.sessionScore}
-          </div>
-          <div className={styles.progress}>
-            Вопросов: {gameSession.answeredQuestions}/
-            {gameSession.totalQuestions}
           </div>
         </div>
       </div>

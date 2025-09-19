@@ -9,31 +9,31 @@
 
 .input {
   padding: 1rem 1.2rem;
-  border: 2px solid #1e40af;
+  border: 2px solid #8b5cf6;
   border-radius: 12px;
   font-size: 1.1rem;
   background: rgba(255, 255, 255, 0.9);
-  color: #1e40af;
+  color: #4c1d95;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
 
 .input:focus {
   outline: none;
-  border-color: #dc2626;
+  border-color: #10b981;
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
   transform: translateY(-2px);
 }
 
 .input::placeholder {
-  color: #1e40af;
+  color: #4c1d95;
   opacity: 0.8;
 }
 
 .button {
   padding: 1rem 2rem;
-  background: linear-gradient(145deg, #dc2626, #ef4444);
+  background: linear-gradient(145deg, #8b5cf6, #7c3aed);
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -43,7 +43,7 @@
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -69,9 +69,9 @@
 }
 
 .button:hover {
-  background: linear-gradient(145deg, #ef4444, #dc2626);
+  background: linear-gradient(145deg, #a855f7, #8b5cf6);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
 }
 
 .button:disabled {
@@ -86,12 +86,12 @@
 }
 
 .error {
-  color: #dc2626;
+  color: #8b5cf6;
   font-size: 0.9rem;
   margin-top: 0.5rem;
   text-align: center;
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(139, 92, 246, 0.1);
   padding: 0.5rem;
   border-radius: 8px;
-  border: 1px solid rgba(220, 38, 38, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.3);
 }
