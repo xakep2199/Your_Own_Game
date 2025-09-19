@@ -1,10 +1,16 @@
-export {userReducer, type IUser,
+export {
+  userReducer,
+  type IUser,
   type ISignInData,
   type ISignUpData,
-  type UserResponseType, UserValidator,signOutThunk,
+  type UserResponseType,
+  UserValidator,
+  signOutThunk,
   signInThunk,
   signUpThunk,
-  refreshTokensThunk, USER_API_ROUTES } from "./user";
+  refreshTokensThunk,
+  USER_API_ROUTES,
+} from "./user";
 export {
   type ITheme,
   type ThemeArrayType,
@@ -19,3 +25,15 @@ export {
   getAllStatisticsByUserIdThunk,
   statisticsReducer,
 } from "./statistics";
+export {
+  type IQuestion,
+  type IGameAnswer,
+  type QuestionArrayType,
+  type QuestionPointsType,
+  QUESTION_POINTS,
+  questionReducer,
+  clearCurrentQuestion,
+  clearGameAnswer,
+  getQuestionByThemeAndPointsThunk,
+  answerQuestionThunk,
+} from "./question";
